@@ -24,7 +24,7 @@ class User(models.Model):
             removed_permission = before_user_perm_set - intersection
 
             _logger.info(
-                "\n*SUPPORT* Groups permissions changed.\nModified user: %s\nUID: %s \nNew: %s \nRemoved: %s \nStacktrace:\n %s\n",
+                "\n*SUPPORT* User permissions changed.\nModified user: %s\nUID: %s \nNew: %s \nRemoved: %s \nStacktrace:\n %s\n",
                 self.name, self.env.user.name, new_permission, removed_permission, ''.join(traceback.format_stack()))
 
         return res
