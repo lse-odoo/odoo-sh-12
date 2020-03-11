@@ -12,11 +12,11 @@ class User(models.Model):
 
     @api.multi
     def write(self, values):
-        before_user_perm_set = set(self.groups_id.ids)
+        before_user_perm_set = set(self.groups_id.ids) if self.groups_id else set()
 
         res = super().write(values)
 
-        after_user_perm_set = set(self.groups_id.ids)
+        after_user_perm_set = set(self.groups_id.ids) if self.groups_id else set()
 
         if before_user_perm_set != after_user_perm_set:
             intersection = after_user_perm_set & before_user_perm_set
@@ -35,11 +35,11 @@ class Group(models.Model):
 
     @api.multi
     def write(self, values):
-        before_users = set(self.users.ids)
+        before_users = set(self.groups_id.ids) if self.groups_id else set()
 
         res = super().write(values)
 
-        after_users_set = set(self.users.ids)
+        after_users_set = set(self.groups_id.ids) if self.groups_id else set()
         if before_users != after_users_set:
             intersection = after_users_set & before_users
             new_permission = after_users_set - intersection
