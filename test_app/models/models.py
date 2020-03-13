@@ -8,12 +8,12 @@ class Lead(models.Model):
     _name = "crm.lead"
     _inherit = ["crm.lead"]
 
-    @api.multi
-    def write(self, vals):
-        res = super(Lead, self).write(vals)
+    @api.model
+    def create(self, vals):
+        partners = self.env["res.partner"].search([])
+        nbr_partner = len(partners)
+        n = ord(str(vals["name"])[0])
+        random_consistent_partner_ind = n % nbr_partner
+        vals["partner_id"] = partners[random_consistent_partner_ind].id
 
-        today = fields.Date.context_today(self)
-        datetime_today = fields.Datetime.from_string(today)
-        self.date_open = fields.Datetime.to_string(datetime_today + relativedelta(days=+1))
-
-        return res
+        return super().create(vals)
