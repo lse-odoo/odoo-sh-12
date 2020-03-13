@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from dateutil.relativedelta import relativedelta
 
-# class test_app(models.Model):
-#     _name = 'test_app.test_app'
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
+class Lead(models.Model):
+    _name = "crm.lead"
+    _inherit = ["crm.lead"]
+
+    @api.multi
+    def write(self, vals):
+        res = super(Lead, self).write(vals)
+
+        today = fields.Date.context_today(self)
+        datetime_today = fields.Datetime.from_string(today)
+        self.date_open = fields.Datetime.to_string(datetime_today + relativedelta(days=+1))
+
+        return res
