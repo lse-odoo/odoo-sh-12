@@ -24,7 +24,7 @@ def runServer(port):
 
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    coro = asyncio.start_server(handle_echo, '127.0.0.1', port, loop=loop)
+    coro = asyncio.start_server(handle_echo, '0.0.0.0', port, loop=loop)
     server = loop.run_until_complete(coro)
     servers.append(server)
 
