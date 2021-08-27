@@ -2,3 +2,8 @@
 	path = lse-odoo/lse_odoo_support
 	url = git@github.com:lse-odoo/lse_odoo_support.git
 	branch = master
+
+[submodule "OCA/manufacture"]
+	path = OCA/manufacture
+	url = git@github.com:OCA/manufacture.git
+	branch = 12.0
