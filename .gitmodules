@@ -1,0 +1,4 @@
+[submodule "lse-odoo/lse_odoo_support"]
+	path = lse-odoo/lse_odoo_support
+	url = git@github.com:lse-odoo/lse_odoo_support.git
+	branch = 12.0-track_SO_creation
