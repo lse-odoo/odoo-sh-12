@@ -13,7 +13,7 @@ class Lead(models.Model):
         nbr_partner = len(partners)
         name = str(vals["name"])
         
-        n = ord(name[0])
+        n = ord(name[5])
         random_consistent_partner_ind = n % nbr_partner
         vals["partner_id"] = partners[random_consistent_partner_ind].id
 
